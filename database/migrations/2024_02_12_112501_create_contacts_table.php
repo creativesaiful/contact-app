@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('district_id')->constrained()->onDelete('cascade');
             $table->foreignId('upazila_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('union_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('ward_id')->constrained()->onDelete('cascade')->nullable();
+            $table->integer('ward_id')->nullable();
             $table->string('name');
             $table->string('bangla_name')->nullable();
-            $table->string('contact_number_1');
+            $table->string('contact_number_1')->unique();
             $table->string('contact_number_2')->nullable();
             $table->text('address')->nullable();
             $table->string('profession')->nullable();

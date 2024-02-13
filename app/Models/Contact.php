@@ -10,7 +10,7 @@ class Contact extends Model
     use HasFactory;
     protected $fillable = [
         'district_id', 'upazila_id', 'union_id', 'ward_id',
-        'name', 'bangla_name', 'contact_number_1', 'contact_number_2',
+        'name', 'bangla_name', 'contact_number_1', 'contact_number_2','category',
         'address', 'profession', 'comments'
     ];
 

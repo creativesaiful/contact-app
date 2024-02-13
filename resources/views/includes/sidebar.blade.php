@@ -11,10 +11,10 @@
                 <li class="menu-title">Navigation</li>
 
                 <li>
-                    <a href="{{route('dashboard')}}">
+                    <a href="{{route('contacts')}}">
                         <i class="fe-airplay"></i>
-                        <span class="badge badge-danger badge-pill float-right">3</span>
-                        <span> Dashboard </span>
+                        <span class="badge badge-danger badge-pill float-right"></span>
+                        <span> Contacts </span>
                     </a>
                 </li>
 
