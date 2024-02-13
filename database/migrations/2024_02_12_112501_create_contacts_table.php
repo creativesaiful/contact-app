@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('contact_number_2')->nullable();
             $table->text('address')->nullable();
             $table->string('profession')->nullable();
+            $table->enum ('category', ['colleague', 'political', 'business'])->nullable();
             $table->text('comments')->nullable();
             $table->timestamps();
         });
