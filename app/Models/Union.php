@@ -15,8 +15,5 @@ class Union extends Model
         return $this->belongsTo(Upazila::class);
     }
 
-    public function wards()
-    {
-        return $this->hasMany(Ward::class);
-    }
+   
 }

@@ -9,8 +9,8 @@
               
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                            <span class="ml-1">Samuel <i class="mdi mdi-chevron-down"></i> </span>
+                            <img src="{{asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
+                            <span class="ml-1"> {{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i> </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                             <!-- item-->
@@ -39,11 +39,14 @@
                             <div class="dropdown-divider"></div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                            <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();" class="dropdown-item notify-item">
                                 <i class="fe-log-out"></i>
                                 <span>Logout</span>
+                            
                             </a>
-
+                            </form>
                         </div>
                     </li>
 

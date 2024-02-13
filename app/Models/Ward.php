@@ -10,10 +10,7 @@ class Ward extends Model
     use HasFactory;
     protected $fillable = ['name', 'union_id'];
 
-    public function union()
-    {
-        return $this->belongsTo(Union::class);
-    }
+   
 
     public function contacts()
     {
