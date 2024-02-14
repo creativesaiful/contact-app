@@ -26,6 +26,8 @@
             </div>
         </div>
 
+
+
         <div class="col-md-6">
 
             <div class="text-md-right mt-3">
@@ -37,9 +39,70 @@
         </div>
     </div>
 
-    <div class="row">
+    <form action="{{ route('send-sms') }}" method="POST">
+        @csrf
+    <div class="row my-2">
+        <div class="col-md-6">
 
+            <div class="form-group">
+                <div class="checkbox checkbox-purple">
+                    <input id="checkAll" type="checkbox" data-parsley-multiple="checkAll">
+                    <label for="checkAll">
+                        Select All to send message
+                    </label>
+
+                    {{-- <input type="submit" value="Send" class="btn btn-success ml-3"> --}}
+
+                    <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#login-modal">Write Message</button>
+                </div>
+        
+
+            </div>
+
+           
+
+        </div>
     </div>
+
+    <div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2 class="text-uppercase text-center mb-4">
+                       Write you message
+                    </h2>
+
+                    <div class="form-group">
+                        <div class="col-12">
+                            <label for="emailaddress1">Subject</label>
+                            <input type="text" name="subject"  class="form-control" required>
+                        </div>
+                    </div>
+
+       
+
+                        <div class="form-group">
+                            <div class="col-12">
+                                <label for="emailaddress1">Message</label>
+                                <textarea name="message" id="" cols="30" rows="5" class="form-control" required></textarea>
+                            </div>
+                        </div>
+
+                       
+
+                        <div class="form-group account-btn text-center">
+                            <div class="col-12">
+                                <button class="btn width-lg btn-rounded btn-primary waves-effect waves-light" type="submit">Send Message</button>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
 
 
     <div class="row">
@@ -54,7 +117,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Category</th>
-                            <th>District</th>
+                            <th>Address</th>
                             <th>Contact</th>
                             <th>Action</th>
 
@@ -85,8 +148,8 @@
                                     <table class="table-bordered dt-responsive nowrap">
                                         <tr>
                                             <td class="font-weight-bold">
-                                                {{ $contact->contact_number_1 }} 
-                                                
+                                                {{ $contact->contact_number_1 }}
+
                                             </td>
                                             <td>
                                                 <a href="tel:{{ $contact->contact_number_1 }}"
@@ -94,49 +157,47 @@
                                             </td>
                                             <td>
                                                 <a href="https://wa.me/+88{{ $contact->contact_number_1 }}"
-                                                    class="btn btn-success btn-sm" target="_blank"> <i class="fab fa-whatsapp"></i></a>
+                                                    class="btn btn-success btn-sm" target="_blank"> <i
+                                                        class="fab fa-whatsapp"></i></a>
                                             </td>
-                                            <td>
+                                                                 <td>
                                                 <label for="send_sms"> Send SMS </label>
-                                                <input type="checkbox" name="send_sms[]"  class="">
+                                                <input type="checkbox" name="{{ $contact->contact_number_1 }}" class="">
                                             </td>
                                         </tr>
 
 
                                         @if ($contact->contact_number_2)
+                                            <tr>
+                                                <td>{{ $contact->contact_number_2 }}</td>
+                                                <td>
+                                                    <a href="tel:{{ $contact->contact_number_2 }}"
+                                                        class="btn btn-gradient btn-sm mx-1"> <i
+                                                            class="fas fa-phone"></i></a>
+                                                </td>
 
-                                        <tr>
-                                            <td>{{ $contact->contact_number_2 }}</td>
-                                            <td>
-                                                <a href="tel:{{ $contact->contact_number_2 }}"
-                                                    class="btn btn-gradient btn-sm mx-1"> <i class="fas fa-phone"></i></a>
-                                            </td>
+                                                <td>
+                                                    <a href="https://wa.me/+88{{ $contact->contact_number_2 }}"
+                                                        class="btn btn-success btn-sm" target="_blank"> <i
+                                                            class="fab fa-whatsapp"></i>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a href="https://wa.me/+88{{ $contact->contact_number_2 }}"
-                                                    class="btn btn-success btn-sm" target="_blank"> <i class="fab fa-whatsapp"></i>
-                                                </a>
-                                            </td>
-
-                                            <td>
-                                                <label for="send_sms"> Send SMS </label>
-                                                <input type="checkbox" name="send_sms" class="send_sms[]">
-                                            </td>
-                                        </tr>
-
-                                    
-
-                                        
-                                    @endif
+                                                <td>
+                                                    <label for="send_sms"> Send SMS </label>
+                                                    <input type="checkbox" name="{{ $contact->contact_number_2 }}">
+                                                </td>
+                                            </tr>
+                                        @endif
 
 
 
                                     </table>
 
-                                   
-                                
 
-                                   
+
+
+
 
 
                                 </td>
@@ -163,7 +224,11 @@
             </div>
         </div>
     </div>
+
+</form>
     <!-- end row -->
+
+  
 @endsection
 
 
@@ -193,5 +258,11 @@
         })
 
         $('.dataTables_filter').hide();
+    </script>
+
+    <script>
+        $("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
     </script>
 @endpush

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\SMSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('upazila-list/{district}', [AjaxController::class, 'upazilaList'])->name('upazila-list');
 
 Route::get('union-list/{upazila}', [AjaxController::class, 'unionList'])->name('union-list');
+
+Route::post('send-sms', [SMSController::class, 'sendSMS'])->name('send-sms');
