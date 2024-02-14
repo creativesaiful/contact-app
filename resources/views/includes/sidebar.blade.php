@@ -26,6 +26,15 @@
                     </a>
                 </li>
 
+
+                <li>
+                    <a href="">
+                        <i class="fe-mail"></i>
+                        <span class="badge badge-danger badge-pill float-right"></span>
+                        <span> Messages </span>
+                    </a>
+                </li>
+
                 {{-- <li>
                     <a href="javascript: void(0);">
                         <i class="fe-briefcase"></i>
