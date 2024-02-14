@@ -12,13 +12,21 @@
 
                 <li>
                     <a href="{{route('contacts')}}">
-                        <i class="fe-airplay"></i>
+                        <i class="fe-search"></i>
                         <span class="badge badge-danger badge-pill float-right"></span>
-                        <span> Contacts </span>
+                        <span> Contacts search </span>
                     </a>
                 </li>
 
                 <li>
+                    <a href="{{ url('contacts/filter?district_id=14') }}">
+                        <i class="fe-filter"></i>
+                        <span class="badge badge-danger badge-pill float-right"></span>
+                        <span> Contacts Filter </span>
+                    </a>
+                </li>
+
+                {{-- <li>
                     <a href="javascript: void(0);">
                         <i class="fe-briefcase"></i>
                         <span> UI Kit </span>
@@ -28,7 +36,7 @@
                         <li><a href="ui-typography.html">Typography</a></li>
 
                     </ul>
-                </li>
+                </li> --}}
 
                
             </ul>

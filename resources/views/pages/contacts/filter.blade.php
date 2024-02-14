@@ -19,18 +19,9 @@
 
     <div class="row">
 
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="myInputTextField"> Search </label>
-                <input type="text" id="myInputTextField" class="form-control" placeholder="Type to search">
-            </div>
-        </div>
+        <div class="col-md-12">
 
-
-
-        <div class="col-md-6">
-
-            <div class="text-md-right mt-3">
+            <div class="text-md-right mb-2">
                 <a href="{{ route('contacts.create') }}" class="btn btn-gradient waves-light waves-effect width-md"> Add
                     New Contact </a>
             </div>
@@ -39,11 +30,126 @@
         </div>
     </div>
 
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('contacts.filter') }}" method="GET" class="parsley-examples" novalidate>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="district_id">Dirstrict <span class="text-danger">*</span> </label>
+                            <select class="form-control" name="district_id" id="district_id" required>
+                                <option value="">All</option>
+                                @foreach ($districts as $district)
+                                    <option value="{{ $district->id }}" {{ $district->id == request()->input('district_id') ? 'selected' : '' }}>
+                                        {{ $district->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="upazila_id">Upazila</label>
+                            <select class="form-control" name="upazila_id" id="upazila_id">
+                                <option value="">Select Upazila</option>
+                                @foreach ($upazilas as $upazila)
+                                    <option value="{{ $upazila->id }}" {{ $upazila->id == request()->input('upazila_id') ? 'selected' : '' }}>
+                                        {{ $upazila->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="union_id">Union</label>
+                            <select class="form-control" name="union_id" id="union_id">
+                                <option value="">Select Union</option>
+                                @foreach ($unions as $union)
+                                    <option value="{{ $union->id }}" {{ $union->id == request()->input('union_id') ? 'selected' : '' }}>
+                                        {{ $union->name }} </option>  
+                                    
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="ward_id">Ward</label>
+                            <select class="form-control" name="ward_id" id="ward_id">
+                                <option value="">Select Ward</option>
+                                <option value="1" {{ request()->input('ward_id') == 1 ? 'selected' : ''}}>Ward 1</option>
+                                <option value="2" {{ request()->input('ward_id') == 2 ? 'selected' : ''}}>Ward 2</option>
+                                <option value="3" {{ request()->input('ward_id') == 3 ? 'selected' : ''}}>Ward 3</option>
+                                <option value="4" {{ request()->input('ward_id') == 4 ? 'selected' : ''}}>Ward 4</option>
+                                <option value="5" {{ request()->input('ward_id') == 5 ? 'selected' : ''}}>Ward 5</option>
+                                <option value="6" {{ request()->input('ward_id') == 6 ? 'selected' : ''}}>Ward 6</option>
+                                <option value="7"   {{ request()->input('ward_id') == 7 ? 'selected' : ''}}>Ward 7</option>
+                                <option value="8" {{ request()->input('ward_id') == 8 ? 'selected' : ''}}>Ward 8</option>
+                                <option value="9" {{ request()->input('ward_id') == 9 ? 'selected' : ''}}>Ward 9</option>
+                               
+                            </select>
+                        </div>
+                    </div>
+
+                  
+                  
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="category"> Category </label>
+
+                            <select name="category" id="category" class="form-control">
+                                <option value="">Select Category</option>
+                                <option value="political" {{ request()->input('category') == 'political' ? 'selected' : ''}} >Political</option>
+                                <option value="business" {{ request()->input('category') == 'business' ? 'selected' : ''}} >Business</option>
+                                <option value="colleague" {{ request()->input('category') == 'colleague' ? 'selected' : ''}}>Colleague</option>
+                                <option value="others" {{ request()->input('category') == 'others' ? 'selected' : ''}}>Others</option>
+
+                            </select>
+
+                            @error('category')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
+
+                  
+
+
+                    <div class="col-md-2">
+                        <div class="form-group mt-3">
+                            <button type="submit"
+                                class="btn btn-lg w-100 btn-gradient waves-light waves-effect width-md">Filter</button>
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
     <form action="{{ route('send-sms') }}" method="POST">
         @csrf
     <div class="row my-2">
         <div class="col-md-6">
 
+
+            @if(count($contacts) > 0)
             <div class="form-group">
                 <div class="checkbox checkbox-purple">
                     <input id="checkAll" type="checkbox" data-parsley-multiple="checkAll">
@@ -59,7 +165,7 @@
 
             </div>
 
-           
+           @endif
 
         </div>
     </div>
@@ -265,4 +371,68 @@
     $('input:checkbox').not(this).prop('checked', this.checked);
 });
     </script>
+
+    
 @endpush
+
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            //district
+            $('#district_id').change(function() {
+                var district_id = $(this).val();
+                $('#upazila_id').empty();
+
+                $.ajax({
+                    url: "{{ route('upazila-list', ['district' => ':district']) }}".replace(
+                        ':district', district_id),
+                    type: "GET",
+                    success: function(data) {
+                        
+                        $('#upazila_id').append('<option value="">Select Upazila</option>');
+                        $.each(data, function(key, value) {
+                            $('#upazila_id').append('<option value="' + value.id +
+                                '">' + value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+
+            //upazila
+            $('#upazila_id').change(function() {
+                var upazila_id = $(this).val();
+                $('#union_id').empty();
+
+                $.ajax({
+                    url: "{{ route('union-list', ['upazila' => ':upazila']) }}".replace(':upazila',
+                        upazila_id),
+                    type: "GET",
+                    success: function(data) {
+                        console.log(data);
+                        $('#union_id').append('<option value="">Select Union</option>');
+                        $.each(data, function(key, value) {
+                            $('#union_id').append('<option value="' + value.id + '">' +
+                                value.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+        });
+
+
+        $('#ward_id').prop('disabled', true);
+
+        $('#union_id').change(function() {
+            if ($(this).val() == '') {
+                $('#ward_id').prop('disabled', true);
+            } else {
+                $('#ward_id').prop('disabled', false);
+            }
+        });
+        
+    </script>
+@endpush
+

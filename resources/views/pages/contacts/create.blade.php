@@ -147,9 +147,11 @@
                             <label for="category"> Category </label>
 
                             <select name="category" id="category" class="form-control">
+                                <option value="">Select Category</option>
                                 <option value="political">Political</option>
                                 <option value="business">Business</option>
                                 <option value="colleague">Colleague</option>
+                                <option value="others">Others</option>
 
                             </select>
 
@@ -270,5 +272,16 @@
             });
 
         });
+
+
+        $('#ward_id').prop('disabled', true);
+
+$('#union_id').change(function() {
+    if ($(this).val() == '') {
+        $('#ward_id').prop('disabled', true);
+    } else {
+        $('#ward_id').prop('disabled', false);
+    }
+});
     </script>
 @endpush
