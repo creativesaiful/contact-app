@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\District;
 use App\Models\Upazila;
 use App\Models\Union;
+use App\Models\Ward;
 use Brian2694\Toastr\Facades\Toastr;
 
 
@@ -51,7 +52,7 @@ class ContactController extends Controller
             'contact_number_2' => $request->contact_number_2,
             'address' => $request->address,
             'profession' => $request->profession,
-            'category' => $request->category,
+            'category' => $request->category ?? 'others',
             'comments' => $request->comments,
         ]);
 
@@ -120,4 +121,49 @@ class ContactController extends Controller
 
 
     }
+
+    public function filter(Request $request)
+{
+    $contacts = Contact::query();
+
+    $upazilas = Upazila::query();
+
+    $unions = Union::query();
+
+    $wards = Ward::query();
+
+    if (!empty($request->district_id)) {
+        $contacts->where('district_id', $request->district_id);
+        $upazilas = Upazila::where('district_id', $request->district_id)->orderBy('name', 'asc')->get();
+    }
+
+    if (!empty($request->upazila_id)) {
+        $contacts->where('upazila_id', $request->upazila_id);
+        $unions = Union::where('upazila_id', $request->upazila_id)->orderBy('name', 'asc')->get();
+    }
+
+    if (!empty($request->union_id)) {
+        $contacts->where('union_id', $request->union_id);
+       
+    }
+
+    if (!empty($request->ward_id)) {
+        $contacts->where('ward_id', $request->ward_id);
+    }
+
+    if(!empty($request->category)){
+
+        $contacts->where('category', $request->category);
+    }
+
+    // Fetch filtered contacts
+    $contacts = $contacts->orderBy('id', 'desc')->get();
+
+    // Fetch districts and upazilas for dropdowns
+    $districts = District::orderBy('name', 'asc')->get();
+    
+
+    return view('pages.contacts.filter', compact('contacts', 'districts', 'upazilas', 'unions', 'wards'));
+}
+
 }

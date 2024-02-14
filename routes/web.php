@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\SMSController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +40,7 @@ Route::middleware(['auth'])->group(function () {
         // Route for storing a new contact
         Route::post('/', [ContactController::class, 'store'])->name('contacts.store');
 
-        // Route for displaying a specific contact
-        Route::get('/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+       
 
         // Route for displaying the contact editing form
         Route::get('/edit/{contact}', [ContactController::class, 'edit'])->name('contacts.edit');
@@ -50,6 +50,8 @@ Route::middleware(['auth'])->group(function () {
 
         // Route for deleting a contact
         Route::get('destroy/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+
+        Route::get('filter', [ContactController::class, 'filter'])->name('contacts.filter');
     });
 });
 
@@ -57,3 +59,5 @@ Route::middleware(['auth'])->group(function () {
 Route::get('upazila-list/{district}', [AjaxController::class, 'upazilaList'])->name('upazila-list');
 
 Route::get('union-list/{upazila}', [AjaxController::class, 'unionList'])->name('union-list');
+
+Route::post('send-sms', [SMSController::class, 'sendSMS'])->name('send-sms');
