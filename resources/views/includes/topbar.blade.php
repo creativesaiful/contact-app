@@ -19,7 +19,7 @@
                             </div>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="{{url('user/profile')}}" class="dropdown-item notify-item">
                                 <i class="fe-user"></i>
                                 <span>Profile</span>
                             </a>
@@ -57,7 +57,7 @@
 
                 <!-- LOGO -->
                 <div class="logo-box">
-                    <a href="{{route('dashboard')}}" class="logo text-center">
+                    <a href="{{route('contacts')}}" class="logo text-center">
                         <span class="logo-lg">
                             <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="16">
 

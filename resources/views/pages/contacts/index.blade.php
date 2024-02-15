@@ -195,11 +195,6 @@
                                     </table>
 
 
-
-
-
-
-
                                 </td>
                                 <td>
                                     <a href="{{ route('contacts.edit', $contact->id) }}"

@@ -11,7 +11,7 @@
                 <li class="menu-title">Navigation</li>
 
                 <li>
-                    <a href="{{route('contacts')}}">
+                    <a href="{{route('contacts')}}" class="{{ Route::is('contacts') ? 'active' : ''}}">
                         <i class="fe-search"></i>
                         <span class="badge badge-danger badge-pill float-right"></span>
                         <span> Contacts search </span>
@@ -19,7 +19,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('contacts/filter?district_id=14') }}">
+                    <a href="{{ url('contacts/filter?district_id=14') }}" class="{{ request()->is('contacts/filter') ? 'active' : ''}}">
                         <i class="fe-filter"></i>
                         <span class="badge badge-danger badge-pill float-right"></span>
                         <span> Contacts Filter </span>
@@ -28,7 +28,7 @@
 
 
                 <li>
-                    <a href="">
+                    <a href="{{route('messages')}}" class="{{ Route::is('messages') ? 'active' : ''}}">
                         <i class="fe-mail"></i>
                         <span class="badge badge-danger badge-pill float-right"></span>
                         <span> Messages </span>

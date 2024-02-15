@@ -53,6 +53,16 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('filter', [ContactController::class, 'filter'])->name('contacts.filter');
     });
+
+
+    Route::prefix('messages' )->group(function () {
+        Route::get('/', [SMSController::class, 'index'])->name('messages');
+        Route::get('/{id}', [SMSController::class, 'destroy'])->name('messages.delete');
+    });
+
+    
+
+
 });
 
 
