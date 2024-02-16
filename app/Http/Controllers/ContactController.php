@@ -26,7 +26,7 @@ class ContactController extends Controller
     {
     
         $districts = District::orderBy('name', 'asc')->get();
-        $upazilas = Upazila::where('district_id', 14)->orderBy('name', 'asc')->get(); 
+        $upazilas = Upazila::where('district_id', 14)->orderBy('id', 'asc')->get(); 
         return view('pages.contacts.create', compact('districts', 'upazilas'));
     }
 

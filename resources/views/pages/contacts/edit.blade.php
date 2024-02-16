@@ -144,11 +144,13 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="category"> Category </label>
-
                             <select name="category" id="category" class="form-control">
                                 <option value="political" {{ @$contact->category == 'political' ? 'selected' : '' }} >Political</option>
                                 <option value="business" {{ @$contact->category == 'business' ? 'selected' : '' }} >Business</option>
                                 <option value="colleague" {{ @$contact->category == 'colleague' ? 'selected' : '' }} >Colleague</option>
+                                 <option value="government job" {{ @$contact->category == 'government job' ? 'selected' : '' }} >Government Job</option>
+                                  <option value="primary teacher" {{ @$contact->category == 'primary teacher' ? 'selected' : '' }} >Primary Teacher</option>
+                                   <option value="others" {{ @$contact->category == 'others' ? 'selected' : '' }} >Others</option>
 
                             </select>
 

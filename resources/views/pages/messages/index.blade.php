@@ -24,7 +24,8 @@
 
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="myTable" class="table table-bordered table-striped">
+                <table id="myTable" class="table table-striped table-bordered dt-responsive nowrap"
+                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -33,6 +34,7 @@
                             <th>SMS</th>
                             <th>Response Code</th>
                             <th>Response Message</th>
+                            <th>Send Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,6 +50,7 @@
                                 @endphp
                                 <td>{{ isset($response->response_code) ? $response->response_code : '' }}</td>
                                 <td>{{ isset($response->success_message) ? $response->success_message : (isset($response->error_message) ? $response->error_message : '') }}</td>
+                               <td>{{ $sms->created_at }}</td>
                                 <td>
                                     <a href="{{ route('messages.delete', $sms->id)}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" >Delete</a>
                                 </td>

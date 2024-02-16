@@ -45,7 +45,17 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="union_id">Union</label>
+                            @php
+                            $union = \App\Models\Union::where('upazila_id', 1)->get();
+                        @endphp
                             <select class="form-control" name="union_id" id="union_id">
+
+                             <option value=""> Select Union </option>
+
+                                @foreach ($union as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->name }} </option>
+                                @endforeach
 
                             </select>
                         </div>
@@ -151,6 +161,8 @@
                                 <option value="political">Political</option>
                                 <option value="business">Business</option>
                                 <option value="colleague">Colleague</option>
+                                <option value="government job">Government Job</option>
+                                <option value="primary teacher">Primary Teacher</option>
                                 <option value="others">Others</option>
 
                             </select>
@@ -234,6 +246,7 @@
             $('#district_id').change(function() {
                 var district_id = $(this).val();
                 $('#upazila_id').empty();
+                $('#union_id').empty();
 
                 $.ajax({
                     url: "{{ route('upazila-list', ['district' => ':district']) }}".replace(
@@ -274,14 +287,14 @@
         });
 
 
-        $('#ward_id').prop('disabled', true);
+//         $('#ward_id').prop('disabled', true);
 
-$('#union_id').change(function() {
-    if ($(this).val() == '') {
-        $('#ward_id').prop('disabled', true);
-    } else {
-        $('#ward_id').prop('disabled', false);
-    }
-});
+// $('#union_id').change(function() {
+//     if ($(this).val() == '') {
+//         $('#ward_id').prop('disabled', true);
+//     } else {
+//         $('#ward_id').prop('disabled', false);
+//     }
+// });
     </script>
 @endpush

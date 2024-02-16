@@ -107,6 +107,8 @@
                                 <option value="political" {{ request()->input('category') == 'political' ? 'selected' : ''}} >Political</option>
                                 <option value="business" {{ request()->input('category') == 'business' ? 'selected' : ''}} >Business</option>
                                 <option value="colleague" {{ request()->input('category') == 'colleague' ? 'selected' : ''}}>Colleague</option>
+                                <option value="government job" {{ request()->input('category') == 'government job' ? 'selected' : ''}}>Government Job</option>
+                                <option value="primary teacher" {{ request()->input('category') == 'primary teacher' ? 'selected' : ''}}>Primary Teacher</option>
                                 <option value="others" {{ request()->input('category') == 'others' ? 'selected' : ''}}>Others</option>
 
                             </select>
