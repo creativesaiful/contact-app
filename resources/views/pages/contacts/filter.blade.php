@@ -107,8 +107,24 @@
                                 <option value="political" {{ request()->input('category') == 'political' ? 'selected' : ''}} >Political</option>
                                 <option value="business" {{ request()->input('category') == 'business' ? 'selected' : ''}} >Business</option>
                                 <option value="colleague" {{ request()->input('category') == 'colleague' ? 'selected' : ''}}>Colleague</option>
+                                <option value="relatives" {{ request()->input('category') == 'relatives' ? 'selected' : ''}}>Relatives</option>
                                 <option value="government job" {{ request()->input('category') == 'government job' ? 'selected' : ''}}>Government Job</option>
                                 <option value="primary teacher" {{ request()->input('category') == 'primary teacher' ? 'selected' : ''}}>Primary Teacher</option>
+
+                                <option value="awamiLeague" {{ request()->input('category') == 'awamiLeague' ? 'selected' : ''}}>AwamiLeague </option>
+                                <option value="mohilaLeague"{{ request()->input('category') == 'mohilaLeague' ? 'selected' : ''}}>MohilaLeague </option>
+                                <option value="juboLeague" {{ request()->input('category') == 'juboLeague' ? 'selected' : ''}}>JuboLeague</option>
+                                <option value="sLeague" {{ request()->input('category') == 'sLeague' ? 'selected' : ''}}>SLeague </option>
+                                <option value="keyman" {{ request()->input('category') == 'keyman' ? 'selected' : ''}}>Keyman</option>
+                                <option value="Chairman" {{ request()->input('category') == 'Chairman' ? 'selected' : ''}}>Friend</option>
+                                <option value="semi chairman" {{ request()->input('category') == 'semi chairman' ? 'selected' : ''}}>Semi chairman </option>
+                                <option value="member" {{ request()->input('category') == 'member' ? 'selected' : ''}}>Member </option>
+                                <option value="semi member" {{ request()->input('category') == 'semi member' ? 'selected' : ''}}>Semi member </option>
+                                <option value="councillor" {{ request()->input('category') == 'councillor' ? 'selected' : ''}}>Councillor </option>
+                                <option value="semi councillor" {{ request()->input('category') == 'semi councillor' ? 'selected' : ''}}>Semi councillor </option>
+                                <option value="Presiding" {{ request()->input('category') == 'Presiding' ? 'selected' : ''}}>Presiding </option>
+                               
+                               
                                 <option value="others" {{ request()->input('category') == 'others' ? 'selected' : ''}}>Others</option>
 
                             </select>
@@ -425,7 +441,7 @@
         });
 
 
-        $('#ward_id').prop('disabled', true);
+        // $('#ward_id').prop('disabled', true);
 
         $('#union_id').change(function() {
             if ($(this).val() == '') {
