@@ -53,6 +53,7 @@ class ContactController extends Controller
             'address' => $request->address,
             'profession' => $request->profession,
             'category' => $request->category ?? 'others',
+            'batch_id' => $request->batch_id,
             'comments' => $request->comments,
         ]);
 
@@ -99,6 +100,7 @@ class ContactController extends Controller
             'address' => $request->address,
             'profession' => $request->profession,
             'category' => $request->category,
+            'batch_id' => $request->batch_id,
             'comments' => $request->comments,
 
         ]);
@@ -154,6 +156,9 @@ class ContactController extends Controller
     if(!empty($request->category)){
 
         $contacts->where('category', $request->category);
+    }
+    if(!empty($request->batch_id)){
+        $contacts->where('batch_id', $request->batch_id);
     }
 
     // Fetch filtered contacts

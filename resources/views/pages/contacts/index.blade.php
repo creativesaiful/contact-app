@@ -135,7 +135,15 @@
                                     {{ @$contact->bangla_name }}
 
                                 </td>
-                                <td>{{ ucfirst(@$contact->category) }}</td>
+                                <td>{{ ucfirst(@$contact->category) }} <br> 
+
+                                    @if (@$contact->batch->batch_year)
+                                    BCS-{{$contact->batch->batch_year}} 
+                                @endif
+                                
+                                   
+                                
+                                </td>
                                 <td>{{ @$contact->district->name }} <br>
 
                                     {{ @$contact->upazila->name }} <br>

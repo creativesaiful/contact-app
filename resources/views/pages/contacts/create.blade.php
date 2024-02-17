@@ -189,6 +189,34 @@
                         </div>
                     </div>
 
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category"> BCS Btach </label>
+
+                            @php
+                                $batches = \App\Models\Batch::all();
+                            @endphp
+
+                            <select name="batch_id" id="batch_id" class="form-control">
+
+                                <option value="">Select Batch</option>
+                                @foreach ($batches as $batch)
+                                    <option value="{{ $batch->id }}">{{ $batch->batch_year }}</option>
+                                @endforeach
+                                
+
+                            </select>
+
+                            @error('batch_id')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="address"> Address </label>
@@ -222,7 +250,7 @@
 
 
                     <div class="col-md-3">
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <button type="submit"
                                 class="btn btn-lg w-100 btn-gradient waves-light waves-effect width-md">Submit</button>
 

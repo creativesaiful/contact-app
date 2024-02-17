@@ -24,6 +24,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->string('profession')->nullable();
             $table->string('category')->nullable();
+            $table->foreignId('batch_id')->constrained()->onDelete('cascade')->nullable();
             $table->text('comments')->nullable();
             $table->timestamps();
         });

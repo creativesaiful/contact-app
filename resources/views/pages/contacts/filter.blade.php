@@ -139,6 +139,32 @@
                     </div>
 
 
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="batch"> BCS-Batch </label>
+
+                            @php
+                                $batches = \App\Models\Batch::all();
+                            @endphp
+
+                            <select name="batch_id" id="batch_id" class="form-control">
+                                <option value=""> Select Batch </option>
+                                @foreach ($batches as  $batch)
+                                    <option value="{{ $batch->id }}" {{ request()->input('batch') == $batch->id ? 'selected' : ''}}>{{ $batch->batch_year }}</option>
+                                    
+                                @endforeach
+                            </select>
+
+                            @error('category')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
+
                   
 
 
@@ -259,7 +285,14 @@
                                     {{ @$contact->bangla_name }}
 
                                 </td>
-                                <td>{{ ucfirst(@$contact->category) }}</td>
+                                <td>{{ ucfirst(@$contact->category) }}
+                                    <br> 
+
+                                    @if (@$contact->batch->batch_year)
+                                    BCS-{{$contact->batch->batch_year}} 
+                                @endif
+                                
+                                </td>
                                 <td>{{ @$contact->district->name }} <br>
 
                                     {{ @$contact->upazila->name }} <br>
