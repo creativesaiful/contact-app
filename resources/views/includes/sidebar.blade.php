@@ -9,6 +9,14 @@
             <ul class="metismenu" id="side-menu">
 
                 <li class="menu-title">Navigation</li>
+                <li>
+                    <a href="{{route('diary')}}" class=" ">
+                        <i class="fe-home"></i>
+                        <span class="badge badge-danger badge-pill float-right"></span>
+                        <span> Forward Diary </span>
+                    </a>
+                </li>
+
 
                 <li>
                     <a href="{{route('contacts')}}" class="{{ Route::is('contacts') ? 'active' : ''}}">
@@ -26,6 +34,7 @@
                     </a>
                 </li>
 
+             
 
                 <li>
                     <a href="{{route('messages')}}" class="{{ Route::is('messages') ? 'active' : ''}}">

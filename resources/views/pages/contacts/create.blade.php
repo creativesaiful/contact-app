@@ -156,27 +156,16 @@
                         <div class="form-group">
                             <label for="category"> Category </label>
 
-                            <select name="category" id="category" class="form-control">
+                            @php
+                                $category = App\Models\Category::all();
+                            @endphp
+
+                            <select name="category_id" id="category" class="form-control">
                                 <option value="">Select Category</option>
-                                <option value="political">Political</option>
-                                <option value="business">Business</option>
-                                <option value="colleague">Colleague</option>
-                                <option value="relatives">Relatives</option>
-                                <option value="government job">Government Job</option>
-                                <option value="primary teacher">Primary Teacher</option>
-                                <option value="awamiLeague">AwamiLeague </option>
-                                <option value="mohilaLeague">MohilaLeague </option>
-                                <option value="juboLeague">JuboLeague</option>
-                                <option value="sLeague ">SLeague </option>
-                                <option value="keyman">Keyman</option>
-                                <option value="Chairman">Friend</option>
-                                <option value="semi chairman">Semi chairman </option>
-                                <option value="member">Member </option>
-                                <option value="semi member">Semi member </option>
-                                <option value="councillor">Councillor </option>
-                                <option value="semi councillor">Semi councillor </option>
-                                <option value="Presiding">Presiding </option>
-                                <option value="others">Others</option>
+                                @foreach ($category as $item)
+                                    <option value="{{ $item->id }}">{{ ucfirst($item->category_name ) }}</option>
+                                    
+                                @endforeach
 
                             </select>
 
@@ -192,7 +181,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="category"> BCS Btach </label>
+                            <label for="category"> BCS Batch </label>
 
                             @php
                                 $batches = \App\Models\Batch::all();

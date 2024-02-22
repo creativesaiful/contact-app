@@ -10,7 +10,7 @@ class Contact extends Model
     use HasFactory;
     protected $fillable = [
         'district_id', 'upazila_id', 'union_id', 'ward_id',
-        'name', 'bangla_name', 'contact_number_1', 'contact_number_2','category','batch_id',
+        'name', 'bangla_name', 'contact_number_1', 'contact_number_2','category_id','batch_id',
         'address', 'profession', 'comments'
     ];
 
@@ -36,5 +36,9 @@ class Contact extends Model
 
     public function batch(){
         return $this->belongsTo(Batch::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 }

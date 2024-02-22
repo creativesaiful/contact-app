@@ -150,38 +150,22 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
+
+                            
+                            @php
+                                $category = App\Models\Category::all();
+                            @endphp
+
+
                             <label for="category"> Category </label>
-                            <select name="category" id="category" class="form-control">
-                                <option value="political" {{ @$contact->category == 'political' ? 'selected' : '' }}>
-                                    Political</option>
-                                <option value="business" {{ @$contact->category == 'business' ? 'selected' : '' }}>
-                                    Business</option>
-                                <option value="colleague" {{ @$contact->category == 'colleague' ? 'selected' : '' }}>
-                                    Colleague</option>
-                                    <option value="relatives" {{ @$contact->category == 'relatives' ? 'selected' : '' }} >Relatives</option>
-                                <option value="government job"
-                                    {{ @$contact->category == 'government job' ? 'selected' : '' }}>Government Job</option>
-                                <option value="primary teacher"
-                                    {{ @$contact->category == 'primary teacher' ? 'selected' : '' }}>Primary Teacher
-                                </option>
+                            <select name="category_id" id="category" class="form-control">
 
-                                <option value="awamiLeague" {{ @$contact->category == 'awamiLeague' ? 'selected' : '' }}>AwamiLeague </option>
-                                <option value="mohilaLeague" {{ @$contact->category == 'mohilaLeague' ? 'selected' : '' }}>MohilaLeague </option>
-                                <option value="juboLeague" {{ @$contact->category == 'juboLeague' ? 'selected' : '' }}>JuboLeague</option>
-                                <option value="sLeague" {{ @$contact->category == 'sLeague' ? 'selected' : '' }} >SLeague </option>
-                                <option value="keyman {{ @$contact->category == 'keyman' ? 'selected' : '' }}">Keyman</option>
-                                <option value="chairman" {{ @$contact->category == 'chairman' ? 'selected' : '' }}>Friend</option>
-                                <option value="semi chairman" {{ @$contact->category == 'semi chairman' ? 'selected' : '' }}>Semi chairman </option>
-                                <option value="member" {{ @$contact->category == 'member' ? 'selected' : '' }}>Member </option>
-                                <option value="semi member" {{  @$contact->category == 'semi member' ? 'selected' : '' }}>Semi member </option>
-                                <option value="councillor" {{ @$contact->category == 'councillor' ? 'selected' : '' }}>Councillor </option>
-                                <option value="semi councillor" {{ @$contact->category == 'semi councillor' ? 'selected' : '' }}>Semi councillor </option>
-                                <option value="Presiding" {{ @$contact->category == 'Presiding' ? 'selected' : '' }}>Presiding </option>
-
-
-                                <option value="others" {{ @$contact->category == 'others' ? 'selected' : '' }}>Others
-                                </option>
-
+                                @foreach ($category as $cat)
+                                    <option value="{{ $cat->id }}" {{ $cat->id == $contact->category_id ? 'selected' : '' }}>
+                                        {{ urfirst($cat->category_name) }}</option>
+                                    
+                                @endforeach
+                               
                             </select>
 
                             @error('category')
@@ -196,7 +180,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="category"> BCS Btach </label>
+                            <label for="category"> BCS Batch </label>
 
                             @php
                                 $batches = \App\Models\Batch::all();
