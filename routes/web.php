@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\SMSController;
+use App\Http\Controllers\DiaryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,24 @@ Route::middleware([
 });
 
 Route::middleware(['auth'])->group(function () {
+
+
+    Route::prefix('diary')->group(function () {
+        Route::get('/', [DiaryController::class, 'index'])->name('diary');
+        Route::get('/create', [DiaryController::class, 'create'])->name('diary.create');
+        Route::post('/', [DiaryController::class, 'store'])->name('diary.store');
+
+        Route::get('/edit/{diary}', [DiaryController::class, 'edit'])->name('diary.edit');
+
+        Route::post('/update/{diary}', [DiaryController::class, 'update'])->name('diary.update');
+
+        Route::get('/destroy/{diary}', [DiaryController::class, 'destroy'])->name('diary.destroy');
+
+    });
+
+
+
+
     Route::prefix('contacts')->group(function () {
 
         Route::get('/', [ContactController::class, 'index'])->name('contacts');
@@ -53,6 +72,16 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('filter', [ContactController::class, 'filter'])->name('contacts.filter');
     });
+
+
+    Route::prefix('messages' )->group(function () {
+        Route::get('/', [SMSController::class, 'index'])->name('messages');
+        Route::get('/{id}', [SMSController::class, 'destroy'])->name('messages.delete');
+    });
+
+    
+
+
 });
 
 

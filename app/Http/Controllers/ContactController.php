@@ -26,7 +26,7 @@ class ContactController extends Controller
     {
     
         $districts = District::orderBy('name', 'asc')->get();
-        $upazilas = Upazila::where('district_id', 14)->orderBy('name', 'asc')->get(); 
+        $upazilas = Upazila::where('district_id', 14)->orderBy('id', 'asc')->get(); 
         return view('pages.contacts.create', compact('districts', 'upazilas'));
     }
 
@@ -52,7 +52,9 @@ class ContactController extends Controller
             'contact_number_2' => $request->contact_number_2,
             'address' => $request->address,
             'profession' => $request->profession,
-            'category' => $request->category ?? 'others',
+            'category_id' => $request->category_id,
+            'batch_id' => $request->batch_id,
+            's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
         ]);
 
@@ -98,7 +100,9 @@ class ContactController extends Controller
             'contact_number_2' => $request->contact_number_2,
             'address' => $request->address,
             'profession' => $request->profession,
-            'category' => $request->category,
+            'category_id' => $request->category_id,
+            'batch_id' => $request->batch_id,
+            's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
 
         ]);
@@ -151,9 +155,15 @@ class ContactController extends Controller
         $contacts->where('ward_id', $request->ward_id);
     }
 
-    if(!empty($request->category)){
+    if(!empty($request->category_id)){
 
-        $contacts->where('category', $request->category);
+        $contacts->where('category_id', $request->category_id);
+    }
+    if(!empty($request->batch_id)){
+        $contacts->where('batch_id', $request->batch_id);
+    }
+    if(!empty($request->s_s_c_batch_id)){
+        $contacts->where('s_s_c_batch_id', $request->s_s_c_batch_id);
     }
 
     // Fetch filtered contacts

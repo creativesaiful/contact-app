@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Contacts')
 
 @section('content')
     <!-- start page title -->
@@ -45,7 +46,17 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="union_id">Union</label>
+                            @php
+                            $union = \App\Models\Union::where('upazila_id', 1)->get();
+                        @endphp
                             <select class="form-control" name="union_id" id="union_id">
+
+                             <option value=""> Select Union </option>
+
+                                @foreach ($union as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->name }} </option>
+                                @endforeach
 
                             </select>
                         </div>
@@ -146,16 +157,76 @@
                         <div class="form-group">
                             <label for="category"> Category </label>
 
-                            <select name="category" id="category" class="form-control">
+                            @php
+                                $category = App\Models\Category::all();
+                            @endphp
+
+                            <select name="category_id" id="category" class="form-control">
                                 <option value="">Select Category</option>
-                                <option value="political">Political</option>
-                                <option value="business">Business</option>
-                                <option value="colleague">Colleague</option>
-                                <option value="others">Others</option>
+                                @foreach ($category as $item)
+                                    <option value="{{ $item->id }}">{{ ucfirst($item->category_name ) }}</option>
+                                    
+                                @endforeach
 
                             </select>
 
                             @error('category')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category"> BCS Batch </label>
+
+                            @php
+                                $batches = \App\Models\Batch::all();
+                            @endphp
+
+                            <select name="batch_id" id="batch_id" class="form-control">
+
+                                <option value="">Select Batch</option>
+                                @foreach ($batches as $batch)
+                                    <option value="{{ $batch->id }}">{{ $batch->batch_year }}</option>
+                                @endforeach
+                                
+
+                            </select>
+
+                            @error('batch_id')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="category"> SSC Batch </label>
+
+                            @php
+                                $sscBatches = \App\Models\SSC_Batch::all();
+                            @endphp
+
+                            <select name="s_s_c_batch_id" id="s_s_c_batch_id" class="form-control">
+
+                                <option value="">Select SSC Batch</option>
+                                @foreach ($sscBatches as $batch)
+                                    <option value="{{ $batch->id }}">{{ $batch->batch_year }}</option>
+                                @endforeach
+                                
+
+                            </select>
+
+                            @error('s_s_c_batch_id')
                              <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
                              </ul>
                                  
@@ -197,7 +268,7 @@
 
 
                     <div class="col-md-3">
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <button type="submit"
                                 class="btn btn-lg w-100 btn-gradient waves-light waves-effect width-md">Submit</button>
 
@@ -234,6 +305,7 @@
             $('#district_id').change(function() {
                 var district_id = $(this).val();
                 $('#upazila_id').empty();
+                $('#union_id').empty();
 
                 $.ajax({
                     url: "{{ route('upazila-list', ['district' => ':district']) }}".replace(
@@ -274,14 +346,14 @@
         });
 
 
-        $('#ward_id').prop('disabled', true);
+//         $('#ward_id').prop('disabled', true);
 
-$('#union_id').change(function() {
-    if ($(this).val() == '') {
-        $('#ward_id').prop('disabled', true);
-    } else {
-        $('#ward_id').prop('disabled', false);
-    }
-});
+// $('#union_id').change(function() {
+//     if ($(this).val() == '') {
+//         $('#ward_id').prop('disabled', true);
+//     } else {
+//         $('#ward_id').prop('disabled', false);
+//     }
+// });
     </script>
 @endpush

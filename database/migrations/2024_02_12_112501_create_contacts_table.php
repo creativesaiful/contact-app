@@ -23,7 +23,12 @@ return new class extends Migration
             $table->string('contact_number_2')->nullable();
             $table->text('address')->nullable();
             $table->string('profession')->nullable();
-            $table->enum ('category', ['colleague', 'political', 'business', 'others'])->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('batch_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('s_s_c_batch_id')->nullable();
+
+            $table->foreign('s_s_c_batch_id')->references('id')->on('s_s_c__batches')->onDelete('cascade')->nullable();
+
             $table->text('comments')->nullable();
             $table->timestamps();
         });
