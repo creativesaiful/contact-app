@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Contacts')
 
 @push('css')
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -139,11 +140,19 @@
                                         {{ @$contact->bangla_name }}
 
                                     </td>
-                                    <td>{{ ucfirst(@$contact->category->category_name) }} <br>
+                                    <td>{{ ucfirst(@$contact->category->category_name) }} 
 
                                         @if (@$contact->batch->batch_year)
+                                        <br>
                                             BCS-{{ $contact->batch->batch_year }}
                                         @endif
+
+                                        @if (@$contact->s_s_c_batch->batch_year)
+                                        <br>
+                                        SSC-{{ $contact->s_s_c_batch->batch_year }}
+                                    @endif
+
+                                        
 
 
 

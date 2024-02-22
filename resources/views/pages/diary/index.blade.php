@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Forward Dairy')
+
 @push('css')
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />

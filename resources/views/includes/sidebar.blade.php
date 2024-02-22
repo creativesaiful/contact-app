@@ -9,13 +9,7 @@
             <ul class="metismenu" id="side-menu">
 
                 <li class="menu-title">Navigation</li>
-                <li>
-                    <a href="{{route('diary')}}" class=" ">
-                        <i class="fe-home"></i>
-                        <span class="badge badge-danger badge-pill float-right"></span>
-                        <span> Forward Diary </span>
-                    </a>
-                </li>
+              
 
 
                 <li>
@@ -31,6 +25,14 @@
                         <i class="fe-filter"></i>
                         <span class="badge badge-danger badge-pill float-right"></span>
                         <span> Contacts Filter </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{route('diary')}}" class="{{ Route::is('diary') ? 'active' : ''}}">
+                        <i class="fe-home"></i>
+                        <span class="badge badge-danger badge-pill float-right"></span>
+                        <span> Forward Diary </span>
                     </a>
                 </li>
 

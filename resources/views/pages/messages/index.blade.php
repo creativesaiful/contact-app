@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Messages')
 
 @push('css')
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />

@@ -54,6 +54,7 @@ class ContactController extends Controller
             'profession' => $request->profession,
             'category_id' => $request->category_id,
             'batch_id' => $request->batch_id,
+            's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
         ]);
 
@@ -101,6 +102,7 @@ class ContactController extends Controller
             'profession' => $request->profession,
             'category_id' => $request->category_id,
             'batch_id' => $request->batch_id,
+            's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
 
         ]);
@@ -159,6 +161,9 @@ class ContactController extends Controller
     }
     if(!empty($request->batch_id)){
         $contacts->where('batch_id', $request->batch_id);
+    }
+    if(!empty($request->s_s_c_batch_id)){
+        $contacts->where('s_s_c_batch_id', $request->s_s_c_batch_id);
     }
 
     // Fetch filtered contacts

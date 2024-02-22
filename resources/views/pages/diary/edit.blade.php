@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Forward Dairy')
 
 @section('content')
     <!-- start page title -->

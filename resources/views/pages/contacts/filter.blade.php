@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@section('title', 'Contacts')
 
 @push('css')
     <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
@@ -151,12 +152,39 @@
                                 <option value=""> Select Batch </option>
                                 @foreach ($batches as $batch)
                                     <option value="{{ $batch->id }}"
-                                        {{ request()->input('batch') == $batch->id ? 'selected' : '' }}>
+                                        {{ request()->input('batch_id') == $batch->id ? 'selected' : '' }}>
                                         {{ $batch->batch_year }}</option>
                                 @endforeach
                             </select>
 
-                            @error('category')
+                            @error('batch_id')
+                                <ul class="parsley-errors-list filled" id="parsley-id-5">
+                                    <li class="parsley-required"> {{ $message }}</li>
+                                </ul>
+                            @enderror
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="batch"> SSC-Batch </label>
+
+                            @php
+                                $sscBatches = \App\Models\SSC_Batch::all();
+                            @endphp
+
+                            <select name="s_s_c_batch_id" id="s_s_c_batch_id" class="form-control">
+                                <option value=""> Select Batch </option>
+                                @foreach ($sscBatches as $batch)
+                                    <option value="{{ $batch->id }}"
+                                        {{ request()->input('s_s_c_batch_id') == $batch->id ? 'selected' : '' }}>
+                                        {{ $batch->batch_year }}</option>
+                                @endforeach
+                            </select>
+
+                            @error('s_s_c_batch_id')
                                 <ul class="parsley-errors-list filled" id="parsley-id-5">
                                     <li class="parsley-required"> {{ $message }}</li>
                                 </ul>
@@ -289,11 +317,17 @@
 
                                     </td>
                                     <td>{{ ucfirst(@$contact->category->category_name) }}
-                                        <br>
+                                     
 
                                         @if (@$contact->batch->batch_year)
+                                        <br>
                                             BCS-{{ $contact->batch->batch_year }}
                                         @endif
+
+                                        @if (@$contact->s_s_c_batch->batch_year)
+                                        <br>
+                                        SSC-{{ $contact->s_s_c_batch->batch_year }}
+                                    @endif
 
                                     </td>
                                     <td>{{ @$contact->district->name }} <br>

@@ -25,6 +25,10 @@ return new class extends Migration
             $table->string('profession')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('batch_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('s_s_c_batch_id')->nullable();
+
+            $table->foreign('s_s_c_batch_id')->references('id')->on('s_s_c__batches')->onDelete('cascade')->nullable();
+
             $table->text('comments')->nullable();
             $table->timestamps();
         });

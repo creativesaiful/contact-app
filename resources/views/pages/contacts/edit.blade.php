@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'Contacts')
 @section('content')
     <!-- start page title -->
     <div class="row">
@@ -162,7 +162,7 @@
 
                                 @foreach ($category as $cat)
                                     <option value="{{ $cat->id }}" {{ $cat->id == $contact->category_id ? 'selected' : '' }}>
-                                        {{ urfirst($cat->category_name) }}</option>
+                                        {{ ucfirst($cat->category_name) }}</option>
                                     
                                 @endforeach
                                
@@ -197,6 +197,34 @@
                             </select>
 
                             @error('batch_id')
+                             <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
+                             </ul>
+                                 
+                             @enderror
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="s_s_c_batch_id"> SSC Batch </label>
+
+                            @php
+                                $sscBatches = \App\Models\SSC_Batch::all();
+                            @endphp
+
+                            <select name="s_s_c_batch_id" id="s_s_c_batch_id" class="form-control">
+
+                                <option value="">Select SSC Batch</option>
+                                @foreach ($sscBatches as $batch)
+                                    <option value="{{ $batch->id }}" {{ @$contact->s_s_c_batch_id == $batch->id ? 'selected' : ''}}>{{ $batch->batch_year }}</option>
+                                @endforeach
+                                
+
+                            </select>
+
+                            @error('s_s_c_batch_id')
                              <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required"> {{ $message }}</li>
                              </ul>
                                  
