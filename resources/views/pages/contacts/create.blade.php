@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 @section('title', 'Contacts')
 
+@push('css')
+
+<link href="{{asset('assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/libs/switchery/switchery.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/libs/select2/select2.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/libs/bootstrap-select/bootstrap-select.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.css')}}" rel="stylesheet" type="text/css" />
+
+@endpush
+
 @section('content')
     <!-- start page title -->
     <div class="row">
@@ -161,8 +171,8 @@
                                 $category = App\Models\Category::all();
                             @endphp
 
-                            <select name="category_id" id="category" class="form-control">
-                                <option value="">Select Category</option>
+                            <select name="category_id[]" id="category" class="select2 form-control select2-multiple" multiple="multiple" multiple data-placeholder="" >
+                                
                                 @foreach ($category as $item)
                                     <option value="{{ $item->id }}">{{ ucfirst($item->category_name ) }}</option>
                                     
@@ -289,10 +299,16 @@
 @push('js')
 
 
+<script src="{{asset('assets/libs/switchery/switchery.min.js')}}"></script>
      <script src="{{asset('assets/libs/parsleyjs/parsley.min.js')}}"></script>
-
-
+     <script src="{{asset('assets/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js')}}"></script>
+  
         <script src="{{asset('assets/js/pages/form-validation.init.js')}}"></script>
+
+        <script src="{{asset('assets/libs/select2/select2.min.js')}}"></script>
+        <script src="{{asset('assets/libs/bootstrap-select/bootstrap-select.min.js')}}"></script>
+
+        <script src="{{asset('assets/js/pages/form-advanced.init.js')}}"></script>
 
     
 @endpush

@@ -7,15 +7,27 @@ use Illuminate\Http\Request;
 use App\Models\Dairy;
 use Toastr;
 
+
 class DiaryController extends Controller
 {
     public function index(){
 
+        date_default_timezone_set('Asia/Tokyo');
+        // upcomming scheduled dairy 
+        $date = date('Y-m-d');
+        $time = date('H:i');
+        $upcommingDairy = Dairy::where('date', '>=', $date)
+                        ->orderBy('time', 'asc')
+                        ->get();
+    
 
-        // upcomming scheduled dairy
-        $upcommingDairy = Dairy::where('date', '>=', date('Y-m-d'))->orderBy('date', 'asc')->get();
+        $existingDiary = Dairy::where('date', '<', date('Y-m-d'))
+                        ->orderByRaw('date + time desc')
+                        ->get();
 
-        return view('pages.diary.index', compact('upcommingDairy'));
+
+
+        return view('pages.diary.index', compact('upcommingDairy', 'existingDiary'));
     }
 
     public function create(){

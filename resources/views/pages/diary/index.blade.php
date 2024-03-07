@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
-                <h4 class="page-title">Forward Dairy </h4>
+                <h4 class="page-title">Forward Diary </h4>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="col-12">
             <div class="card-box table-responsive">
 
-
+                <h3 class="text-success">Upcomming Diary</h3>
                 <table id="diaryTable" class="table table-striped table-bordered dt-responsive nowrap"
                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
@@ -95,6 +95,64 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card-box table-responsive">
+
+                <h3 class="text-danger">Past Diary</h3>
+                <table id="PastdiaryTable" class="table table-striped table-bordered dt-responsive nowrap"
+                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Meeting With</th>
+                            <th>Place</th>
+                            <th>Details</th>
+                      
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach ($existingDiary as $key => $dairy)
+                            <tr>
+                                <td>{{ ++$key }}</td>
+                                <td class="text-danger">{{ date('l, F j, Y', strtotime($dairy->date)) }}</td>
+
+                                <td>{{ date('h:i A', strtotime($dairy->time)) }}</td>
+
+                                <td> {{ $dairy->person }} </td>
+                                <td>{{ $dairy->place }}</td>
+                                <td>{{ $dairy->description }}</td>
+                                {{-- <td>
+                                    <a href="{{ route('diary.edit', $dairy->id) }}"
+                                        class="btn btn-sm btn-gradient waves-light waves-effect"> <i
+                                            class="fas fa-edit"></i></a>
+
+                                    <a href="{{ route('diary.destroy', $dairy->id) }}"
+                                        class="btn btn-danger btn-sm waves-light waves-effect"> <i
+                                            class="fas fa-trash"></i></a>
+
+                                </td> --}}
+                            </tr>
+                        @endforeach
+
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
@@ -129,6 +187,16 @@
             }).buttons().container().appendTo("#diaryTable_wrapper .col-md-6:eq(0)")
         });
  </script>
+
+
+<script>
+    $(document).ready(function() {
+          $("#datatable").DataTable(), $("#PastdiaryTable").DataTable({
+              lengthChange: true,
+              buttons: ["print"]
+          }).buttons().container().appendTo("#PastdiaryTable_wrapper .col-md-6:eq(0)")
+      });
+</script>
     
 @endpush
     

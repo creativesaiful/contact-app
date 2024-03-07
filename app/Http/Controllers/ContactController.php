@@ -18,8 +18,6 @@ class ContactController extends Controller
 
         $contacts = Contact::orderBy('id', 'desc')->get();
 
- 
-
         return view ('pages.contacts.index', compact('contacts'));
     }
     public function create()
@@ -33,7 +31,7 @@ class ContactController extends Controller
 
     public function store(Request $request){
         
-
+        
        
         $validated = $request->validate([
             'district_id' => 'required',
@@ -52,7 +50,7 @@ class ContactController extends Controller
             'contact_number_2' => $request->contact_number_2,
             'address' => $request->address,
             'profession' => $request->profession,
-            'category_id' => $request->category_id,
+            'category_id' => json_encode($request->category_id),
             'batch_id' => $request->batch_id,
             's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
@@ -100,7 +98,7 @@ class ContactController extends Controller
             'contact_number_2' => $request->contact_number_2,
             'address' => $request->address,
             'profession' => $request->profession,
-            'category_id' => $request->category_id,
+            'category_id' => json_encode($request->category_id),
             'batch_id' => $request->batch_id,
             's_s_c_batch_id' => $request->s_s_c_batch_id,
             'comments' => $request->comments,
@@ -157,7 +155,10 @@ class ContactController extends Controller
 
     if(!empty($request->category_id)){
 
-        $contacts->where('category_id', $request->category_id);
+      
+
+        $contacts->whereJsonContains('category_id',$request->category_id);
+           
     }
     if(!empty($request->batch_id)){
         $contacts->where('batch_id', $request->batch_id);

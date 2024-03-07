@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('contact_number_2')->nullable();
             $table->text('address')->nullable();
             $table->string('profession')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade')->nullable();
+            $table->string('category_id')->nullable();
             $table->foreignId('batch_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('s_s_c_batch_id')->nullable();
 

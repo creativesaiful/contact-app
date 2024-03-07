@@ -316,7 +316,28 @@
                                         {{ @$contact->bangla_name }}
 
                                     </td>
-                                    <td>{{ ucfirst(@$contact->category->category_name) }}
+                                    <td>
+                                        @php
+                                        $categories = json_decode(@$contact->category_id);
+                                      
+                                    @endphp
+
+
+                                    @if (is_array($categories))
+                                        @php
+                                        
+                                            $categoryList = [];
+                                            foreach ($categories as $categoryId) {
+                                                $category = \App\Models\Category::find($categoryId);
+                                                if ($category) {
+                                                    $categoryList[] = ucfirst($category->category_name);
+                                                }
+                                            }
+                                            echo implode(', ', $categoryList);
+                                        @endphp
+                                    @else
+                                        {{ ucfirst(@$contact->category->category_name) }}
+                                    @endif
                                      
 
                                         @if (@$contact->batch->batch_year)

@@ -33,8 +33,7 @@
         <div class="col-md-6">
 
             <div class="text-md-right mt-3">
-                <a href="{{ route('contacts.create') }}" class="btn btn-gradient waves-light waves-effect width-md"> Add
-                    New Contact </a>
+                <a href="{{ route('contacts.create') }}" class="btn btn-gradient waves-light waves-effect width-md"> Add New Contact </a>
             </div>
 
 
@@ -140,19 +139,42 @@
                                         {{ @$contact->bangla_name }}
 
                                     </td>
-                                    <td>{{ ucfirst(@$contact->category->category_name) }} 
+                                    <td>
+
+                                        @php
+                                            $categories = json_decode(@$contact->category_id);
+                                          
+                                        @endphp
+
+
+                                        @if (is_array($categories))
+                                            @php
+                                            
+                                                $categoryList = [];
+                                                foreach ($categories as $categoryId) {
+                                                    $category = \App\Models\Category::find($categoryId);
+                                                    if ($category) {
+                                                        $categoryList[] = ucfirst($category->category_name);
+                                                    }
+                                                }
+                                                echo implode(', ', $categoryList);
+                                            @endphp
+                                        @else
+                                            {{ ucfirst(@$contact->category->category_name) }}
+                                        @endif
+
 
                                         @if (@$contact->batch->batch_year)
-                                        <br>
+                                            <br>
                                             BCS-{{ $contact->batch->batch_year }}
                                         @endif
 
                                         @if (@$contact->s_s_c_batch->batch_year)
-                                        <br>
-                                        SSC-{{ $contact->s_s_c_batch->batch_year }}
-                                    @endif
+                                            <br>
+                                            SSC-{{ $contact->s_s_c_batch->batch_year }}
+                                        @endif
 
-                                        
+
 
 
 
@@ -278,13 +300,11 @@
         });
 
         new $.fn.dataTable.Buttons(oTable, {
-                buttons: [
-                    {
-                        extend: 'print',
-                        text: 'Print'
-                    }
-                ]
-            }).container().appendTo($('#myTable_wrapper .col-md-6:eq(0)'));
+            buttons: [{
+                extend: 'print',
+                text: 'Print'
+            }]
+        }).container().appendTo($('#myTable_wrapper .col-md-6:eq(0)'));
 
         $('.dataTables_filter').hide();
     </script>
