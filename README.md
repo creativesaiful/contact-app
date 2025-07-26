@@ -1,10 +1,14 @@
 ### Contact App   
- 
+
 ## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+
 
 
 ## Introduction
-  
+- Contact App is a web application that allows you to manage contacts and send SMS to save contracts.
 
 ## Features
 
