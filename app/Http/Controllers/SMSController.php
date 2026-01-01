@@ -33,7 +33,7 @@ class SMSController extends Controller
 
         // Dispatch a job to send SMS to the selected phone numbers
         foreach ($selectedPhoneNumbers as $phoneNumber) {
-            SendSMSJob::dispatch($phoneNumber, $message, $subject);
+            SendSMSJob::dispatch($phoneNumber, $message, $subject)->delay(now()->addSeconds(5));
         }
 
         Toastr::success('SMS sending job queued successfully', 'Success');

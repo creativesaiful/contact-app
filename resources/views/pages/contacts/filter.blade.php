@@ -450,6 +450,9 @@
     <script>
         $(document).ready(function() {
             $("#datatable").DataTable(), $("#myTable").DataTable({
+                pageLength: -1,
+lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+
                 lengthChange: true,
                 buttons: ["print"]
             }).buttons().container().appendTo("#myTable_wrapper .col-md-6:eq(0)")
